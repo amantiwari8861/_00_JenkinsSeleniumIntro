@@ -13,7 +13,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.release>25</maven.compiler.release>
   </properties>
 
   <dependencyManagement>
@@ -51,6 +51,12 @@
           <artifactId>extentreports</artifactId>
           <version>5.1.2</version>
           <scope>compile</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.testng</groupId>
+          <artifactId>testng</artifactId>
+          <version>7.11.0</version>
+          <scope>test</scope>
       </dependency>
   </dependencies>
 
