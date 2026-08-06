@@ -2,20 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('clone') {
+        stage('Clone') {
             steps {
                 git 'https://github.com/amantiwari8861/_00_JenkinsSeleniumIntro.git'
             }
         }
 
-        stage('Deploy code') {
+        stage('Deploy Code') {
             steps {
-                step {
-                    sh '''
-                        sudo cp -r * /var/www/html/
-                        sudo systemctl restart nginx
-                    '''
-                }
+                sh '''
+                    sudo cp -r * /var/www/html/
+                    sudo systemctl restart nginx
+                '''
             }
         }
     }
