@@ -1,21 +1,21 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven3'
-        jdk 'JDK21'
-    }
-
     stages {
-        stage('Checkout') {
+        stage('clone') {
             steps {
-                git 'https://github.com/amantiwari8861/_00_JenkinsSeleniumIntro'
+                git 'https://github.com/amantiwari8861/_00_JenkinsSeleniumIntro.git'
             }
         }
 
-        stage('Build & Test') {
+        stage('Deploy code') {
             steps {
-                bat 'mvn clean test'
+                step {
+                    sh '''
+                        sudo cp -r * /var/www/html/
+                        sudo systemctl restart nginx
+                    '''
+                }
             }
         }
     }

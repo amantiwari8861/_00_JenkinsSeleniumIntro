@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Regression Suite">
+    <test name="All Tests">
+        <classes>
+            <class name="com.training.AppTest"/>
+            <class name="com.training.Regression"/>
+        </classes>
+    </test>
+</suite>
