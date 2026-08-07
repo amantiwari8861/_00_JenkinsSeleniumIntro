@@ -16,7 +16,7 @@ pipeline {
 
         stage('Run Selenium Tests') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
     }
