@@ -1,20 +1,38 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'JDK21'
+        maven 'Maven3.9'
+    }
+
     stages {
-        stage('Clone') {
+
+        stage('Build') {
             steps {
-                git 'https://github.com/amantiwari8861/_00_JenkinsSeleniumIntro.git'
+                bat 'mvn clean compile'
             }
         }
 
-        stage('Deploy Code') {
+        stage('Run Selenium Tests') {
             steps {
-                sh '''
-                    sudo cp -r * /var/www/html/
-                    sudo systemctl restart nginx
-                '''
+                sh 'mvn test'
             }
+        }
+    }
+
+    post {
+        always {
+            junit 'target/surefire-reports/*.xml'
+            archiveArtifacts artifacts: 'target/**', fingerprint: true
+        }
+
+        success {
+            echo 'All Selenium tests passed.'
+        }
+
+        failure {
+            echo 'Some Selenium tests failed.'
         }
     }
 }
