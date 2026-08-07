@@ -21,18 +21,30 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            junit 'target/surefire-reports/*.xml'
-            archiveArtifacts artifacts: 'target/**', fingerprint: true
-        }
+post {
+    always {
 
-        success {
-            echo 'All Selenium tests passed.'
-        }
+        junit allowEmptyResults: true,
+              testResults: 'target/surefire-reports/*.xml'
 
-        failure {
-            echo 'Some Selenium tests failed.'
-        }
+        archiveArtifacts artifacts: 'target/**', fingerprint: true
+
+        publishHTML([
+            allowMissing: true,
+            alwaysLinkToLastBuild: true,
+            keepAll: true,
+            reportDir: 'reports',
+            reportFiles: 'report.html',
+            reportName: 'Extent Report'
+        ])
     }
+
+    success {
+        echo 'All Selenium tests passed.'
+    }
+
+    failure {
+        echo 'Some Selenium tests failed.'
+    }
+}
 }
