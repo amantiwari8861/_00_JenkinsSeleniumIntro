@@ -19,4 +19,24 @@ pipeline {
             }
         }
     }
+     post {
+        always {
+
+            junit allowEmptyResults: true,
+                  testResults: 'target/surefire-reports/*.xml'
+
+            allure([
+                includeProperties: false,
+                results: [[path: 'allure-results']]
+            ])
+        }
+
+        success {
+            echo 'All Selenium tests passed.'
+        }
+
+        failure {
+            echo 'Some Selenium tests failed.'
+        }
+    }
 }
