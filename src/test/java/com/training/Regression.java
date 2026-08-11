@@ -28,11 +28,11 @@ public class Regression {
 	public void regressionTetst1()
 	{
 		System.out.println("regression Testing 1 by "+Thread.currentThread());
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		// try {
+		// 	Thread.sleep(10000);
+		// } catch (InterruptedException e) {
+		// 	e.printStackTrace();
+		// }
 		ExtentTest test =extent.createTest("Regression Test 1");
 		test.pass("Test successfull!");
 	}
@@ -40,12 +40,11 @@ public class Regression {
 	public void regressionTetst2()
 	{
 		System.out.println("regression Testing 2 by "+Thread.currentThread());
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
+		// try {
+		// 	Thread.sleep(10000);
+		// } catch (InterruptedException e) {
+		// 	e.printStackTrace();
+		// }
 		ExtentTest test =extent.createTest("Regression Test 2");
 		test.fail("Test Failed 😢🥲!");
 	}
