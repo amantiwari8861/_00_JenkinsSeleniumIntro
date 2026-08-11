@@ -2,49 +2,21 @@ pipeline {
     agent any
 
     tools {
-        jdk 'java25'
-        maven 'mvn3_9'
+        maven 'Maven3'
+        jdk 'JDK21'
     }
 
     stages {
-
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                bat 'mvn clean compile'
+                git 'https://github.com/amantiwari8861/_00_JenkinsSeleniumIntro'
             }
         }
 
-        stage('Run Selenium Tests') {
+        stage('Build & Test') {
             steps {
-                bat 'mvn test'
+                bat 'mvn clean test'
             }
         }
     }
-
-post {
-    always {
-
-        junit allowEmptyResults: true,
-              testResults: 'target/surefire-reports/*.xml'
-
-        archiveArtifacts artifacts: 'target/**', fingerprint: true
-
-        publishHTML([
-            allowMissing: true,
-            alwaysLinkToLastBuild: true,
-            keepAll: true,
-            reportDir: 'reports',
-            reportFiles: 'report.html',
-            reportName: 'Extent Report'
-        ])
-    }
-
-    success {
-        echo 'All Selenium tests passed.'
-    }
-
-    failure {
-        echo 'Some Selenium tests failed.'
-    }
-}
 }
